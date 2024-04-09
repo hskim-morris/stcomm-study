@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <title>Count</title>
+    <script>
+        $(document).ready(function () {
+            function setCounter(number) {
+                $("#counter").val(number);
+            } 
+            function getCounter() {
+                return Number($("#counter").val()); 
+            } 
+            $("#plus").click(function (e) { 
+                setCounter(getCounter()+1);
+                
+            });
+            $("#minus").click(function (e) {
+                setCounter(getCounter()-1);
+            });
+        });
+
+    </script>
+
+    <style>
+        .test1 {
+            background-color: red;
+            display: inline-block;
+        }
+        .test2 {
+            background-color: blue;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="test1">a</div>
+    <div class="test2">b</div>
+    <input type="text" name="" id="counter" value="0">
+    <input type="button" value="+" id="plus">
+    <input type="button" value="-" id="minus">
+</body>
+</html>

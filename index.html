@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do list</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+   
     <!-- <link rel="stylesheet" href="/css/common.css"> -->
     <style>
         body {
@@ -43,6 +45,9 @@
             text-align: left;
         }
         .area2 span {
+            flex-grow: 1;
+        }
+        .area2 input.todoInputText {
             flex-grow: 1;
         }
         .area2 div {
@@ -85,6 +90,11 @@
             display: block;
         }
 
+        .area2 button {
+            margin-left: 5px;
+            height: 20px;
+        }
+
         button {
             height: 35px;
             border: none;
@@ -96,12 +106,46 @@
             background-color: #21b2a9;
             width: 60px;
         }
-        .area2 button {
+        button.remove  {
             background-color: #fe0100;
+            width: 60px;
+        }
+        button.modify {
+            background-color: blueviolet;
             width: 60px;
         }
 
     </style>
+    <script>
+        $(document).ready(function () {
+            $(".save").click(function(){
+                var todoText = $("#todoText").val();
+                $("<div/>")
+                .append($("<input/>", {type:"checkbox", name:"", id: ""}))
+                .append($("<span/>", {class:"todoText"}).text(todoText))
+                .append($("<button/>", {type:"button", class: "remove"}).text("Remove").click(function(){
+                    $(this).parent("div").remove();
+                }))
+                .append($("<button/>", {type:"button", class: "modify"}).text("Modify").click(function(){
+                    var modifyBtn = $(this);
+                    var todoText = modifyBtn.siblings("span.todoText");
+                    todoText.replaceWith($("<input/>", {class:"todoInputText"}).val(todoText.text()));
+                    modifyBtn.siblings("button.remove").hide();
+                    modifyBtn.hide();
+                    modifyBtn.siblings("button.save").show();
+                }))
+                .append($("<button/>", {type:"button", class: "save"}).text("Save").click(function(){
+                    var saveBtn = $(this);
+                    var todoInputText = saveBtn.siblings("input.todoInputText");
+                    todoInputText.replaceWith($("<span/>", {class:"todoText"}).text(todoInputText.val()));
+                    saveBtn.hide();
+                    saveBtn.siblings("button.remove").show();
+                    saveBtn.siblings("button.modify").show();
+                }).hide())
+                .appendTo("#todoList");
+            });
+        });
+    </script>
 </head>
 <!-- <body style="background-color: green;"> -->
 <body>
@@ -113,14 +157,14 @@
         <article class="area1" id="test1">
             <p class="title">My Todos</p>
             <div>
-                <input type="text" name="" id="">
+                <input type="text" name="" id="todoText">
                 <button type="button" class="save">Save</button>
             </div>
         </article>
-        <article class="area2" id="test2">
-            <div>
+        <article class="area2" id="todoList">
+            <!-- <div>
                 <input type="checkbox" name="" id="">
-                <span>TEST</span>
+                <span>TESTwwwwwwwwwwwwww</span>
                 <button type="button">remove</button>
             </div>
             <div>
@@ -129,13 +173,10 @@
                 <button type="button">remove</button>
             </div>
             <div>
-                <input type="date" data-date="" data-date-format="YYYY-MMMM-DD" value="2015-08-09">
-
-                <input type="date" id="myDate" value="2024-03-07">
                 <input type="checkbox" name="" id="">
                 <span>TEST</span>
                 <button type="button">remove</button>
-            </div>
+            </div> -->
         </article>
     </section>
  
